@@ -8,26 +8,37 @@ Minimal React frontend for session-authenticated login/logout and customer CRUD.
 - Add/Edit/Delete customer
 - Minimalistic black-and-white theme
 
-## API Configuration
-Backend base URL is configured via environment variable:
-- `REACT_APP_API_BASE` (optional): e.g. `http://localhost:8000`
-  - If omitted, calls are made to relative paths such as `/api/...` suitable for same-origin deployments or dev proxy setups.
+## Backend Connectivity
+- Dev proxy is set to `http://localhost:3001` (see `package.json`). All API calls go to `/api/...` and will be forwarded to the Django backend on port 3001.
+- Alternatively, set `REACT_APP_API_BASE` to an absolute URL (e.g., `http://localhost:3001`) to bypass the proxy.
 
-Create a `.env` file (do not commit) based on `.env.example`.
+Create a `.env` file (do not commit) based on `.env.example` if you want to override the API base URL.
 
 ## Development
-- `npm start` – start dev server
-- `npm test` – run tests (CI-friendly)
-- `npm run build` – production build
+1) Install dependencies:
+   npm install
+
+2) Start dev server:
+   npm start
+   - Frontend: http://localhost:3000
+   - Backend (expected): http://localhost:3001
+
+3) Build for production:
+   npm run build
+
+4) Run tests (CI-friendly):
+   npm test
 
 ## Notes
 - This app uses `fetch` with `credentials: 'include'` to send cookies required by Django session authentication.
+- Ensure Django allows:
+  - CORS and CSRF for http://localhost:3000
+  - Session cookie to be sent with credentials (set SameSite and CSRF tokens appropriately)
 - Backend endpoints used:
-  - `POST /api/auth/login/`
-  - `POST /api/auth/logout/`
-  - `GET /api/customers/`
-  - `GET /api/customers/{id}/`
-  - `POST /api/customers/`
-  - `PUT /api/customers/{id}/`
-  - `DELETE /api/customers/{id}/`
-- Ensure CORS/session config on the backend allows the frontend origin and credentials.
+  - POST /api/auth/login/
+  - POST /api/auth/logout/
+  - GET /api/customers/
+  - GET /api/customers/{id}/
+  - POST /api/customers/
+  - PUT /api/customers/{id}/
+  - DELETE /api/customers/{id}/

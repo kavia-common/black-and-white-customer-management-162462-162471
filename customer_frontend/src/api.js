@@ -1,7 +1,7 @@
 /**
  * API helper for communicating with the Django backend.
  * Uses session-based authentication (send cookies) via credentials: 'include'.
- * Configure API base URL via REACT_APP_API_BASE (defaults to '').
+ * Configure API base URL via REACT_APP_API_BASE (defaults to '') which relies on CRA dev proxy to localhost:3001.
  */
 
 const API_BASE = process.env.REACT_APP_API_BASE || '';

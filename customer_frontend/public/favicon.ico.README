@@ -1,0 +1,2 @@
+This project intentionally omits a binary favicon. CRA will look for /favicon.ico; if absent this is harmless.
+If you want to add one, place a favicon.ico file here. For CI purposes, this README prevents missing file confusion.
