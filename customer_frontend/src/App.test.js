@@ -1,14 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 import AuthProvider from './hooks/useAuth';
-import { MemoryRouter } from 'react-router-dom';
+
+// App already contains a BrowserRouter; avoid nesting routers in tests
 
 test('renders navbar brand', () => {
   render(
     <AuthProvider>
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>
+      <App />
     </AuthProvider>
   );
   const brand = screen.getByText(/Customer Manager/i);
